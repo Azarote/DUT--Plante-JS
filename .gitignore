@@ -3,3 +3,4 @@
 /dist/main.js
 /dist/styles.css
 package-lock.json
+/.idea/*
