@@ -1,5 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+require("babel-core/register");
+require("babel-polyfill");
 
 var config = {
   context: path.resolve(__dirname, 'src'),		
@@ -13,7 +15,6 @@ var config = {
 	library: 'myApp',
     libraryTarget: 'umd'
   },
-  watch: true,
   
  module: {
   rules: [
@@ -49,6 +50,16 @@ var config = {
 }
 
 module.exports = (env, argv) => {
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        useBuiltIns: 'usage',
+        corejs: 3
+      }
+    ]
+  ]
+  
   if (argv.mode === 'development') {
     config.devtool = 'eval'
 
