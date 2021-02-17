@@ -1,6 +1,4 @@
 /node_modules/
-/dist/app.js
-/dist/main.js
-/dist/styles.css
+/dist/*
 package-lock.json
 /.idea/*
