@@ -6,6 +6,8 @@ import regeneratorRuntime from "regenerator-runtime";
   const description = document.createElement('p');
   description.innerHTML = "PlantSearcher est un moteur de recherche référencant des milliers de plantes";
  
+  let token = 'Fh5DUrCLASPWC00uquG6RhbQ3uluXJw5wSNyjyqU1Xs';
+
   const input_value = document.createElement('input');
   input_value.setAttribute('type', 'text');
   input_value.setAttribute('id', 'input_id');
@@ -31,7 +33,7 @@ import regeneratorRuntime from "regenerator-runtime";
 
     let butt = document.getElementById('input_id').value;
 
-    let requestURL = 'https://trefle.io/api/v1/plants/search?token=Fh5DUrCLASPWC00uquG6RhbQ3uluXJw5wSNyjyqU1Xs&q='+butt+'&limit=5';
+    let requestURL = 'https://trefle.io/api/v1/plants/search?token='+token+'&q='+butt+'&limit=5';
   
     const fetch = require('node-fetch');
   
@@ -46,6 +48,7 @@ import regeneratorRuntime from "regenerator-runtime";
         }else{
           text += "<a href=''> "+myjson.data[i].common_name+"</a><br><img height='300' src='"+myjson.data[i].image_url+"'><br>";
         }
+        text += "<input type='button' id='plant"+i+"' value='En savoir plus'><br>";
       }
 
       plant.innerHTML = text; 
@@ -54,3 +57,7 @@ import regeneratorRuntime from "regenerator-runtime";
       document.body.appendChild(plant);
     })();
  }
+
+function getInfos(plantid){
+
+}
