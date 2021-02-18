@@ -46,9 +46,15 @@ import "./css/grillade.css";
       for(let i=0; i<myjson.data.length; i++){
         if(myjson.data[i].image_url == null){
           let nophoto = "http://placehold.jp/808080/ffffff/400x300.png?text=Pas%20d'image%20pour%20cette%20plante%20%3A%2F"
-          text += "<div><a href=''> "+myjson.data[i].common_name+"</a><br><img src="+nophoto+"+> <br>";
+            if (myjson.data[i].common_name == null)
+                text += "<div><a href=''> "+myjson.data[i].scientific_name+"</a><br><img src="+nophoto+"+> <br>";
+            else
+                  text += "<div><a href=''> "+myjson.data[i].common_name+"</a><br><img src="+nophoto+"+> <br>";
         }else{
-          text += "<div><a href=''> "+myjson.data[i].common_name+"</a><br><img height='300' src='"+myjson.data[i].image_url+"'><br>";
+            if (myjson.data[i].common_name == null)
+                text += "<div><a href=''> "+myjson.data[i].scientific_name+"</a><br><img height='300' src='"+myjson.data[i].image_url+"'><br>";
+            else
+                text += "<div><a href=''> "+myjson.data[i].common_name+"</a><br><img height='300' src='"+myjson.data[i].image_url+"'><br>";
         }
         text += "<input type='button' id='plant"+i+"' value='En savoir plus'><br></div>";
       }
