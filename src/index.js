@@ -45,7 +45,7 @@ import regeneratorRuntime from "regenerator-runtime";
       for(let i=0; i<myjson.data.length; i++){
         if(myjson.data[i].image_url == null){
             let nophoto = "http://placehold.jp/808080/ffffff/400x300.png?text=Pas%20d'image%20pour%20cette%20plante%20%3A%2F"
-          text += "<a href=''> "+myjson.data[i].common_name+"</a><br><img src="+nophoto+"+>";
+          text += "<a href=''> "+myjson.data[i].common_name+"</a><br><img src="+nophoto+"+> <br>";
         }else{
           text += "<a href=''> "+myjson.data[i].common_name+"</a><br><img height='300' src='"+myjson.data[i].image_url+"'><br>";
         }
