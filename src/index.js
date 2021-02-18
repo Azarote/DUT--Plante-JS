@@ -1,4 +1,5 @@
 import regeneratorRuntime from "regenerator-runtime";
+import "./css/grillade.css";
 
   const title = document.createElement('h1');
   title.innerHTML = 'PlantSearcher';
@@ -33,7 +34,7 @@ import regeneratorRuntime from "regenerator-runtime";
 
     let butt = document.getElementById('input_id').value;
 
-    let requestURL = 'https://trefle.io/api/v1/plants/search?token='+token+'&q='+butt+'&limit=5';
+    let requestURL = 'https://trefle.io/api/v1/plants/search?token='+token+'&q='+butt+'&limit=6';
   
     const fetch = require('node-fetch');
   
@@ -41,16 +42,17 @@ import regeneratorRuntime from "regenerator-runtime";
       const response = await fetch(requestURL);
       const myjson = await response.json();
       
-      let text = '';
+      let text = '<div class="grid grid-cols-3">';
       for(let i=0; i<myjson.data.length; i++){
         if(myjson.data[i].image_url == null){
-            let nophoto = "http://placehold.jp/808080/ffffff/400x300.png?text=Pas%20d'image%20pour%20cette%20plante%20%3A%2F"
-          text += "<a href=''> "+myjson.data[i].common_name+"</a><br><img src="+nophoto+"+>";
+          let nophoto = "http://placehold.jp/808080/ffffff/400x300.png?text=Pas%20d'image%20pour%20cette%20plante%20%3A%2F"
+          text += "<div><a href=''> "+myjson.data[i].common_name+"</a><br><img src="+nophoto+"+>";
         }else{
-          text += "<a href=''> "+myjson.data[i].common_name+"</a><br><img height='300' src='"+myjson.data[i].image_url+"'><br>";
+          text += "<div><a href=''> "+myjson.data[i].common_name+"</a><br><img height='300' src='"+myjson.data[i].image_url+"'><br>";
         }
-        text += "<input type='button' id='plant"+i+"' value='En savoir plus'><br>";
+        text += "<input type='button' id='plant"+i+"' value='En savoir plus'><br></div>";
       }
+      text += '</div>';
 
       plant.innerHTML = text; 
   
