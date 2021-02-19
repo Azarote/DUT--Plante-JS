@@ -1,4 +1,5 @@
 import regeneratorRuntime from "regenerator-runtime";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./css/grillade.css";
 
   const title = document.createElement('h1');
