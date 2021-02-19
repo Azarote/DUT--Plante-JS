@@ -1,7 +1,7 @@
 import regeneratorRuntime from "regenerator-runtime";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import "./css/grillade.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
 
   const title = document.createElement('h1');
   title.innerHTML = 'PlantSearcher';
@@ -14,6 +14,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
   const input_value = document.createElement('input');
   input_value.setAttribute('type', 'text');
   input_value.setAttribute('id', 'input_id');
+  input_value.addEventListener("keypress", function (e){
+      if (e.key === 'Enter'){
+          search();
+      }
+  })
 
   const button = document.createElement('input');
   button.setAttribute('type', 'button');
@@ -51,10 +56,25 @@ import 'bootstrap/dist/css/bootstrap.min.css';
           text += "<div><a href=''> "+(myjson.data[i].common_name == null ? myjson.data[i].scientific_name : myjson.data[i].common_name)+"</a>"+
           "<br>"+(myjson.data[i].image_url == null ? '<img src='+nophoto+'>' : '<img height=300 src='+myjson.data[i].image_url+'>')+"<br>";
   
-        text += "<input type='button' class='btn btn-info' id='plant"+i+"' value='En savoir plus'><br></div>";
+        text += "<input type='button' data-toggle=\"modal\" data-target=\"#largeModal\" class='btn btn-info' id='plant"+i+"' value='En savoir plus'><br></div>";
       }
       text += '</div>';
 
+      text += '<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">\n' +
+          '  <div class="modal-dialog modal-lg">\n' +
+          '    <div class="modal-content">\n' +
+          '      <div class="modal-header">\n' +
+          '        <h4 class="modal-title" id="myModalLabel">titre</h4>\n' +
+          '        <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n' +
+          '          <span aria-hidden="true">&times;</span>\n' +
+          '        </button>\n' +
+          '      </div>\n' +
+          '      <div class="modal-body">\n' +
+          '        <h3>Modal Body</h3>\n' +
+          '      </div>\n' +
+          '    </div>\n' +
+          '  </div>\n' +
+          '</div>\n';
       plant.innerHTML = text; 
   
       document.body.removeChild(document.getElementById('result'));
