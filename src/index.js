@@ -46,7 +46,7 @@ content.appendChild(modal);
 
 
 function search() {
-  const plant = document.createElement('h2');
+  const plant = document.createElement('p');
   plant.setAttribute('id', 'result');
 
   let butt = document.getElementById('input_id').value;
@@ -61,10 +61,10 @@ function search() {
 
     let text = '<div class="grid grid-cols-3">';
     for (let i = 0; i < myjson.data.length; i++) {
-      let nophoto = "http://placehold.jp/808080/ffffff/400x300.png?text=Pas%20d'image%20pour%20cette%20plante%20%3A%2F"
+      let nophoto = "http://placehold.jp/a4aeb8/000000/250x300.png?text=Pas%20d'image%20pour%20cette%20plante"
 
-      text += "<div><a href=''> " + (myjson.data[i].common_name == null ? myjson.data[i].scientific_name : myjson.data[i].common_name) + "</a>" +
-        "<br>" + (myjson.data[i].image_url == null ? '<img src=' + nophoto + '>' : '<img height=300 src=' + myjson.data[i].image_url + '>') + "<br>";
+      text += "<div><p>" + (myjson.data[i].common_name == null ? myjson.data[i].scientific_name : myjson.data[i].common_name) + "</p>"
+       + (myjson.data[i].image_url == null ? '<img src=' + nophoto + '>' : '<img height=300 width=250px src=' + myjson.data[i].image_url + '>') + "<br>";
 
       text += "<input type='button' data-toggle=\"modal\" data-target=\"#largeModal\" class='btn btn-info' id='plant" + i + "' value='En savoir plus'><br></div>";
     }
@@ -97,7 +97,7 @@ function search() {
           const response = await fetch(requestURL2);
           const myjson = await response.json();
 
-          document.getElementById('myModalLabel').innerHTML = "> " + myjson.data.common_name;
+          document.getElementById('myModalLabel').innerHTML = myjson.data.common_name;
           let body = (myjson.data.image_url == null ? 'No photo' : '<img height=300 src=' + myjson.data.image_url + '>')+'<br>';
           body += "<p>Nom scientifique : "+myjson.data.scientific_name+"</p>";
 
