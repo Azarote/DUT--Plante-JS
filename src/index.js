@@ -1,5 +1,6 @@
 import regeneratorRuntime from "regenerator-runtime";
 import "./css/grillade.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
   const title = document.createElement('h1');
   title.innerHTML = 'PlantSearcher';
@@ -44,19 +45,12 @@ import "./css/grillade.css";
       
       let text = '<div class="grid grid-cols-3">';
       for(let i=0; i<myjson.data.length; i++){
-        if(myjson.data[i].image_url == null){
           let nophoto = "http://placehold.jp/808080/ffffff/400x300.png?text=Pas%20d'image%20pour%20cette%20plante%20%3A%2F"
-            if (myjson.data[i].common_name == null)
-                text += "<div><a href=''> "+myjson.data[i].scientific_name+"</a><br><img src="+nophoto+"+> <br>";
-            else
-                  text += "<div><a href=''> "+myjson.data[i].common_name+"</a><br><img src="+nophoto+"+> <br>";
-        }else{
-            if (myjson.data[i].common_name == null)
-                text += "<div><a href=''> "+myjson.data[i].scientific_name+"</a><br><img height='300' src='"+myjson.data[i].image_url+"'><br>";
-            else
-                text += "<div><a href=''> "+myjson.data[i].common_name+"</a><br><img height='300' src='"+myjson.data[i].image_url+"'><br>";
-        }
-        text += "<input type='button' id='plant"+i+"' value='En savoir plus'><br></div>";
+
+          text += "<div><a href=''> "+(myjson.data[i].common_name == null ? myjson.data[i].scientific_name : myjson.data[i].common_name)+"</a>"+
+          "<br>"+(myjson.data[i].image_url == null ? '<img src='+nophoto+'>' : '<img height=300 src='+myjson.data[i].image_url+'>')+"<br>";
+  
+        text += "<input type='button' class='btn btn-info' id='plant"+i+"' value='En savoir plus'><br></div>";
       }
       text += '</div>';
 
