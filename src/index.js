@@ -1,7 +1,7 @@
 import regeneratorRuntime from "regenerator-runtime";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-import "./css/grillade.css";
+//import "./css/grillade.css";
 
 const title = document.createElement('h1');
 title.innerHTML = 'PlantSearcher';
@@ -59,11 +59,11 @@ function search() {
     const response = await fetch(requestURL);
     const myjson = await response.json();
 
-    let text = '<div class="grid grid-cols-3">';
+    let text = '<div class="row">';
     for (let i = 0; i < myjson.data.length; i++) {
       let nophoto = "http://placehold.jp/a4aeb8/000000/250x300.png?text=Pas%20d'image%20pour%20cette%20plante"
 
-      text += "<div><p>" + (myjson.data[i].common_name == null ? myjson.data[i].scientific_name : myjson.data[i].common_name) + "</p>"
+      text += "<div class='col-md-4 boxplante'><p><span id='title'>" + (myjson.data[i].common_name == null ? myjson.data[i].scientific_name : myjson.data[i].common_name) + "</span></p>"
        + (myjson.data[i].image_url == null ? '<img src=' + nophoto + '>' : '<img height=300 width=250px src=' + myjson.data[i].image_url + '>') + "<br>";
 
       text += "<input type='button' data-toggle=\"modal\" data-target=\"#largeModal\" class='btn btn-info' id='plant" + i + "' value='En savoir plus'><br></div>";
