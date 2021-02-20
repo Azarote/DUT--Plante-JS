@@ -62,7 +62,7 @@ function search() {
     for (let i = 0; i < myjson.data.length; i++) {
       let nophoto = "http://placehold.jp/a4aeb8/000000/250x300.png?text=Pas%20d'image%20pour%20cette%20plante"
 
-      text += "<div class='col-md-4 boxplante'><p><span id='title'>" + (myjson.data[i].common_name == null ? myjson.data[i].scientific_name : myjson.data[i].common_name) + "</span></p>"
+      text += "<div class='col-md-4 boxplante'><p><span class='title'>" + (myjson.data[i].common_name == null ? myjson.data[i].scientific_name : myjson.data[i].common_name) + "</span></p>"
        + (myjson.data[i].image_url == null ? '<img src=' + nophoto + '>' : '<img height=300 width=250px src=' + myjson.data[i].image_url + '>') + "<br>";
 
       text += "<input type='button' data-toggle=\"modal\" data-target=\"#largeModal\" class='btn btn-info' id='plant" + i + "' value='En savoir plus'><br></div>";
@@ -99,12 +99,12 @@ function search() {
           document.getElementById('myModalLabel').innerHTML = myjson.data.common_name;
           let body = (myjson.data.image_url == null ? 'No photo' : '<img id="imagemodal" height=300 src=' + myjson.data.image_url + '>')+'<br>';
           let nodata = "<span id=no_data>Pas de données disponibles.</span>";
-          body += "<h3>Info générale</h3> <hr>";
-          body += "<p>Nom commun : " +(myjson.data.common_name == null ? nodata : myjson.data.common_name) + "</p>";
-          body += "<p>Nom scientifique : "+(myjson.data.scientific_name == null ? nodata :myjson.data.scientific_name) +"</p>";
-          body += "<p>Genre : "+(myjson.data.main_species.genus == null ? nodata : myjson.data.main_species.genus)+"</p>";
-          body += "<p>Famille : "+(myjson.data.main_species.family == null ? nodata : myjson.data.main_species.family)+"</p>";
-          body += "<p>Nom commun famille : "+(myjson.data.family_common_name == null ? nodata : myjson.data.family_common_name) +"</p>";
+          body += "<div id='info'><h3>Info générale</h3> <hr>";
+          body += "<p><span class='title'>Nom commun </span>: " +(myjson.data.common_name == null ? nodata : myjson.data.common_name) + "</p>";
+          body += "<p><span class='title'>Nom scientifique </span>: "+(myjson.data.scientific_name == null ? nodata :myjson.data.scientific_name) +"</p>";
+          body += "<p><span class='title'>Genre </span>: "+(myjson.data.main_species.genus == null ? nodata : myjson.data.main_species.genus)+"</p>";
+          body += "<p><span class='title'>Famille </span>: "+(myjson.data.main_species.family == null ? nodata : myjson.data.main_species.family)+"</p>";
+          body += "<p><span class='title'>Nom commun famille </span>: "+(myjson.data.family_common_name == null ? nodata : myjson.data.family_common_name) +"</p></div>";
           body += '<div id="accordion">'
           +'<div class="card">'
           + '<div class="card-header" id="headingOne">'
@@ -113,7 +113,8 @@ function search() {
           +    '</button>'
           +'</div>'
           +'<div id="collapseOne" class="collapse" aria-labelledby="headingOne">'
-          +'<div class="card-body">';
+          +'<div class="card-body">'
+          +'<div id="accordionimage">';
 
 
           for (let i = 0; i < Object.keys(myjson.data.main_species.images).length; i++) {
@@ -124,7 +125,7 @@ function search() {
             }
           }
 
-          body += '</div></div></div></div>';
+          body += '</div></div></div></div></div>';
 
           document.getElementById('modal-body').innerHTML = body;
         })();
