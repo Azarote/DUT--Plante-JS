@@ -12,7 +12,6 @@ body {
 
 .btn{
     margin-top: 5px;
-    margin-bottom: 30px;
 }
 .row {
     margin: auto;
@@ -56,6 +55,15 @@ img{
 }
 .card-header{
     padding: 5px;
+}
+
+.boxplante{
+    display: inline-block;
+    padding: 40px 40px 0;
+}
+
+#result .container{
+    text-align: center;
 }
 
 @media (max-width: 990px) {
