@@ -98,8 +98,15 @@ function search() {
           const myjson = await response.json();
 
           document.getElementById('myModalLabel').innerHTML = myjson.data.common_name;
-          let body = (myjson.data.image_url == null ? 'No photo' : '<img height=300 src=' + myjson.data.image_url + '>')+'<br>';
-          body += "<p>Nom scientifique : "+myjson.data.scientific_name+"</p>";
+          let body = (myjson.data.image_url == null ? 'No photo' : '<img id="imagemodal" height=300 src=' + myjson.data.image_url + '>')+'<br>';
+          let nodata = "<span id=no_data>Pas de donnée disponible.</span>";
+          body += "<h3>Info générale</h3> <hr>";
+          body += "<p>Nom commun : " +(myjson.data.common_name == null ? nodata : myjson.data.common_name) + "</p>";
+          body += "<p>Nom scientifique : "+(myjson.data.scientific_name == null ? nodata :myjson.data.scientific_name) +"</p>";
+          body += "<p>Genre : "+(myjson.data.main_species.genus == null ? nodata : myjson.data.main_species.genus)+"</p>";
+          body += "<p>Famille : "+(myjson.data.main_species.family == null ? nodata : myjson.data.main_species.family)+"</p>";
+          body += "<p>Nom commun famille : "+(myjson.data.family_common_name == null ? nodata : myjson.data.family_common_name) +"</p>";
+
 
           document.getElementById('modal-body').innerHTML = body;
         })();

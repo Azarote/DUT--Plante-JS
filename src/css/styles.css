@@ -18,7 +18,16 @@ body {
     margin: auto;
     text-align: center;
 }
+.modal-body{
+    text-align: center;
+}
 
+#no_data{
+    font-style: italic;
+}
+#imagemodal{
+    float: left;
+}
 img{
     border-radius:5px;
     -webkit-box-shadow: 0 0 7px -3px rgba(0,0,0,0.75);
