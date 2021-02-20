@@ -1,10 +1,9 @@
 import regeneratorRuntime from "regenerator-runtime";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-//import "./css/grillade.css";
 
 const title = document.createElement('h1');
-title.innerHTML = 'PlantSearcher';
+title.innerHTML = 'PlantSearcher 🌱';
 
 const description = document.createElement('p');
 description.innerHTML = "PlantSearcher est un moteur de recherche référencant des milliers de plantes";
@@ -99,22 +98,37 @@ function search() {
 
           document.getElementById('myModalLabel').innerHTML = myjson.data.common_name;
           let body = (myjson.data.image_url == null ? 'No photo' : '<img id="imagemodal" height=300 src=' + myjson.data.image_url + '>')+'<br>';
-          let nodata = "<span id=no_data>Pas de donnée disponible.</span>";
+          let nodata = "<span id=no_data>Pas de données disponibles.</span>";
           body += "<h3>Info générale</h3> <hr>";
           body += "<p>Nom commun : " +(myjson.data.common_name == null ? nodata : myjson.data.common_name) + "</p>";
           body += "<p>Nom scientifique : "+(myjson.data.scientific_name == null ? nodata :myjson.data.scientific_name) +"</p>";
           body += "<p>Genre : "+(myjson.data.main_species.genus == null ? nodata : myjson.data.main_species.genus)+"</p>";
           body += "<p>Famille : "+(myjson.data.main_species.family == null ? nodata : myjson.data.main_species.family)+"</p>";
           body += "<p>Nom commun famille : "+(myjson.data.family_common_name == null ? nodata : myjson.data.family_common_name) +"</p>";
+          body += '<div id="accordion">'
+          +'<div class="card">'
+          + '<div class="card-header" id="headingOne">'
+          +    '<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">'
+          +      'Autres images'
+          +    '</button>'
+          +'</div>'
+          +'<div id="collapseOne" class="collapse" aria-labelledby="headingOne">'
+          +'<div class="card-body">';
 
+
+          for (let i = 0; i < Object.keys(myjson.data.main_species.images).length; i++) {
+            let val = Object.keys(myjson.data.main_species.images)[i];
+
+            for(let i = 0; i < Object.keys(myjson.data.main_species.images[val]).length; i++){
+              body+= '<img height=300 src='+myjson.data.main_species.images[val][i].image_url+'>';    
+            }
+          }
+
+          body += '</div></div></div></div>';
 
           document.getElementById('modal-body').innerHTML = body;
         })();
       });
     }
   })();
-}
-
-function getInfos(plantid) {
-
 }
