@@ -1,6 +1,9 @@
 import regeneratorRuntime from "regenerator-runtime";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
+import background from "./img/gplay.png";
+
+document.body.style.backgroundImage = "url(" + background + ")";
 
 const title = document.createElement('h1');
 title.innerHTML = 'PlantSearcher 🌱';
