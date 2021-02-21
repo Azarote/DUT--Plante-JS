@@ -1,5 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssets = require('optimize-css-assets-webpack-plugin')
 require("babel-core/register");
 require("babel-polyfill");
 
@@ -47,6 +49,9 @@ var config = {
   ]
 },
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'assets/stylesheets/[name].css', chunkFilename: '[id].css'
+    }),
     new HtmlWebpackPlugin({
       title: 'PlantSearcher'
     })
@@ -92,14 +97,7 @@ module.exports = (env, argv) => {
             publicPath: '../'
           }
         },
-        { loader: 'css-loader' },
-        { loader: 'resolve-url-loader' },
-        {
-          loader: 'sass-loader',
-          options: {
-            sourceMap: true
-          }
-        }
+        { loader: 'css-loader' }
       ]
     })
     config.plugins.push(new OptimizeCSSAssets())
